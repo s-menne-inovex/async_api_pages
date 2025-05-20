@@ -34,10 +34,11 @@ jobs:
       - name: AsyncAPI CLI Action
         uses: asyncapi/cli@v3.1.1
         with:
-          template: '@asyncapi/html-template@3.2.1'  #In case of template from npm, because of @ it must be in quotes
-          filepath: api/api.yaml
-          parameters: -p baseHref=/test-experiment/ sidebarOrganization=byTags #space separated list of key/values
-          output: generated-html
+          custom_command: generate fromTemplate api/api.yaml @asyncapi/html-template@3.2.1 --use-new-generator --output generated-html
+          #template: '@asyncapi/html-template@3.2.1'  #In case of template from npm, because of @ it must be in quotes
+          #filepath: api/api.yaml
+          #parameters: -p baseHref=/test-experiment/ sidebarOrganization=byTags #space separated list of key/values
+          #output: generated-html
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
