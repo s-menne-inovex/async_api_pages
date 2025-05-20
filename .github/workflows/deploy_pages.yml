@@ -35,7 +35,7 @@ jobs:
         uses: asyncapi/cli@v3.1.1
         with:
           template: '@asyncapi/html-template@3.2.1'  #In case of template from npm, because of @ it must be in quotes
-          filepath: api/api.yml
+          filepath: api/api.yaml
           parameters: -p baseHref=/test-experiment/ sidebarOrganization=byTags #space separated list of key/values
           output: generated-html
       - name: Setup Pages
