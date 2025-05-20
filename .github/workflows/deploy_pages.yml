@@ -1,5 +1,5 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# Workflow for deploying the generated async api documentation to GitHub Pages
+name: Deploy api documentation to GitHub Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -34,17 +34,17 @@ jobs:
       - name: AsyncAPI CLI Action
         uses: asyncapi/cli@v3.1.1
         with:
+          # custom_comand because we need to use the --use-new-generator flag for async api 3.0.0
+          # generator template: @asyncapi/html-template@3.2.1 
+          # input filepath: api/api.yaml
+          # output directory: generated-html
           custom_command: generate fromTemplate api/api.yaml @asyncapi/html-template@3.2.1 --use-new-generator --output generated-html
-          #template: '@asyncapi/html-template@3.2.1'  #In case of template from npm, because of @ it must be in quotes
-          #filepath: api/api.yaml
-          #parameters: -p baseHref=/test-experiment/ sidebarOrganization=byTags #space separated list of key/values
-          #output: generated-html
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
+          # Upload only generated folder
           path: 'generated-html'
       - name: Deploy to GitHub Pages
         id: deployment
